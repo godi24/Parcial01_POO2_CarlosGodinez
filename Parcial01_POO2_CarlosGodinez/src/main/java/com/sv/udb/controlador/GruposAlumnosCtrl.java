@@ -6,6 +6,7 @@
 package com.sv.udb.controlador;
 
 import com.sv.udb.modelo.Alumnos;
+import com.sv.udb.modelo.GruposAlumnos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,9 +19,8 @@ import javax.persistence.TypedQuery;
  *
  * @author Carlos
  */
-public class AlumnosCtrl {
-
-    public boolean guar(Alumnos obje)
+public class GruposAlumnosCtrl {
+    public boolean guar(GruposAlumnos obje)
     {
         boolean resp = false;
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PARCIALPU");
@@ -42,21 +42,28 @@ public class AlumnosCtrl {
         return resp;
     }
     
-    public List<Alumnos> ConsTodo()
+    public List<GruposAlumnos> ConsTodo(Object Codi)
     {
-        List<Alumnos> resp = new ArrayList<>();
+        if(Codi == null){
+            Codi = 1;
+        }
+        List<GruposAlumnos> resp = new ArrayList<>();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PARCIALPU");
         EntityManager em = emf.createEntityManager();
         try
         {
-           TypedQuery<Alumnos> query =em.createNamedQuery("Alumnos.findAll", Alumnos.class);
+            TypedQuery<GruposAlumnos> query =em.createNamedQuery("GruposAlumnos.findByCodiGrup", GruposAlumnos.class);
+            query.setParameter("codiGrup",Codi);
            resp = query.getResultList();
         }
         catch(Exception ex)
         {
             
         }
+        em.close();
+        emf.close();
         return resp;
+       
     }
     
     public Alumnos cons(Long codiAlum)

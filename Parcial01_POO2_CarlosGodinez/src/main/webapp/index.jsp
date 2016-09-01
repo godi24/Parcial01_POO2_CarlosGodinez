@@ -45,7 +45,7 @@
                                             <input type="text" name="txtApel" value="${txtApel}" placeholder="(*) Apellido" MaxLength="255"/>
                                         </div>
                                         <div class="input-field col l6 s12">
-                                            <input type="text" name="txtFech" value="${txtFech}" placeholder="(*) Fecha de nacimiento" MaxLength="255"/>
+                                            <input type="text" name="txtFech" value="${txtFech}" placeholder="(*) Fecha de nacimiento (eg. 1990-01-01)" MaxLength="255"/>
                                         </div>
                                         <div class="input-field col l6 s12">
                                             <input type="text" name="txtMail" value="${txtMail}" placeholder="(*) E-Mail" MaxLength="255"/>
@@ -57,7 +57,7 @@
                                             <input type="text" name="txtDire" value="${txtDire}" placeholder="(*) Dirección" MaxLength="255"/>
                                         </div>
                                         <div class="input-field col l6 s12">
-                                            <input type="text" name="txtGene" value="${txtGene}" placeholder="(*) Género" MaxLength="1"/>
+                                            <input type="text" name="txtGene" value="${txtGene}" placeholder="(*) Género (M = Masculino, F = Femenino)" MaxLength="1"/>
                                         </div>
                                     </div>
                                     <br>

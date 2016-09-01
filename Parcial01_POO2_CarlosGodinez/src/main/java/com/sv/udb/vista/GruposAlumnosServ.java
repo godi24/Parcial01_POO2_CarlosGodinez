@@ -6,14 +6,13 @@
 package com.sv.udb.vista;
 
 import com.sv.udb.controlador.AlumnosCtrl;
+import com.sv.udb.controlador.GruposAlumnosCtrl;
 import com.sv.udb.modelo.Alumnos;
+import com.sv.udb.modelo.GruposAlumnos;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Carlos
  */
-@WebServlet(name = "AlumnosServ", urlPatterns = {"/AlumnosServ"})
-public class AlumnosServ extends HttpServlet {
+@WebServlet(name = "GruposAlumnosServ", urlPatterns = {"/GruposAlumnosServ"})
+public class GruposAlumnosServ extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +36,7 @@ public class AlumnosServ extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         boolean esValido = request.getMethod().equals("POST");
         if(esValido)
         {
@@ -45,17 +44,25 @@ public class AlumnosServ extends HttpServlet {
             String CRUD = request.getParameter("accionBtn");
             if(CRUD.equals("Guardar"))
             {
-                Alumnos obje = new Alumnos();
-                obje.setNombAlum(request.getParameter("txtNomb"));
-                obje.setApelAlum(request.getParameter("txtApel"));
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date fecnac = formatter.parse(request.getParameter("txtFech"));
-                obje.setFechNaciAlum(fecnac);
-                obje.setMailAlum(request.getParameter("txtMail"));
-                obje.setTeleAlum(request.getParameter("txtTele"));
-                obje.setDireAlum(request.getParameter("txtDire"));
-                obje.setGeneAlum(request.getParameter("txtGene").charAt(0));
-                mens = new AlumnosCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
+//                Alumnos obje = new Alumnos();
+//                obje.setNombAlum(request.getParameter("txtNomb"));
+//                obje.setApelAlum(request.getParameter("txtApel"));
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//                Date fecnac = formatter.parse(request.getParameter("txtFech"));
+//                obje.setFechNaciAlum(fecnac);
+//                obje.setMailAlum(request.getParameter("txtMail"));
+//                obje.setTeleAlum(request.getParameter("txtTele"));
+//                obje.setDireAlum(request.getParameter("txtDire"));
+//                obje.setGeneAlum(request.getParameter("txtGene").charAt(0));
+//                mens = new AlumnosCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
+            }
+            else if(CRUD.equals("Consultar"))
+            {
+                Object CodiG = request.getAttribute("cmbGrupos");
+                GruposAlumnos obj = (GruposAlumnos) new GruposAlumnosCtrl().ConsTodo(CodiG);
+                if (obj != null) {
+                    request.setAttribute( "demoAttr", new GruposAlumnosCtrl().ConsTodo(CodiG)); 
+                }
             }
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
@@ -77,11 +84,7 @@ public class AlumnosServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AlumnosServ.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -95,11 +98,7 @@ public class AlumnosServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AlumnosServ.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

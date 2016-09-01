@@ -39,6 +39,7 @@
                                     <div class="row s12">
                                         <label>&nbsp;&nbsp;&nbsp;&nbsp;(*) Campos obligatorios</label><br>
                                         <div class="row col offset-l2 l8 s12">
+                                            Seleccionar grupo:
                                             <select name="cmbGrupos" class="browser-default">
                                                 <jsp:useBean id="GruposCtrl" class="com.sv.udb.controlador.GruposCtrl" scope="page"/>
                                                 <c:forEach items="${GruposCtrl.ConsTodo()}" var="fila">
@@ -54,6 +55,7 @@
                                             </select>
                                         </div>
                                         <div class="row col offset-l2 l8 s12">
+                                            Seleccionar alumno:
                                             <select name="cmbAlumnos" class="browser-default">
                                                 <jsp:useBean id="AlumnosCtrl" class="com.sv.udb.controlador.AlumnosCtrl" scope="page"/>
                                                 <c:forEach items="${AlumnosCtrl.ConsTodo()}" var="fila">
@@ -68,8 +70,8 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <div class="input-field col l6 s12">
-                                            <input type="text" name="txtEsta" value="${txteesta}" placeholder="(*) Estado (1 = Activo, 0 = Inactivo)" MaxLength="1"/>
+                                        <div class="input-field offset-l3 col l6 s12">
+                                            <input type="text" name="txtEsta" value="${txtEsta}" placeholder="(*) Estado (1 = Activo, 0 = Inactivo)" MaxLength="1"/>
                                         </div>
                                     </div>
                                     <br>
@@ -83,31 +85,32 @@
                         <br>
                         <div class="col s12">
                             <fieldset>
-                                <legend>LISTADO DE ALUMNOS</legend>
-                                <!--jsp:useBean id="AlumnosCtrl" class="com.sv.udb.controlador.AlumnosCtrl" scope="page"/>-->
-                                <table class="bordered striped responsive-table centered highlight">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Mail</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${AlumnosCtrl.ConsTodo()}" var="fila">
-                                        <tr>
-                                            <td><c:out value="${fila.nombAlum}"></c:out></td>
-                                            <td><c:out value="${fila.apelAlum}"></c:out></td>
-                                            <td><c:out value="${fila.mailAlum}"></c:out></td>
-                                            <td>
-                                                <center>
-                                                    <p><input name="codiRadi" type="radio" id="test${fila.codiAlum}" value="${fila.codiAlum}"/><label for="test${fila.codiAlum}"></label></p>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                <div class="row col offset-l2 l8 s12">
+                                    Seleccionar grupo:
+                                    <select name="cmbGrupos" class="browser-default">
+                                        <jsp:useBean id="GruposBuscarCtrl" class="com.sv.udb.controlador.GruposCtrl" scope="page"/>
+                                        <c:forEach items="${GruposBuscarCtrl.ConsTodo()}" var="fila">
+                                            <c:choose>
+                                                <c:when test="${fila.codiGrup eq cmbGrupos}">
+                                                    <option name="codiGrup" value="${fila.codiGrup}" selected="">${fila.nombGrup}</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option name="codiGrup" value="${ffila.codiGrup}">${fila.nombGrup}</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </select><br>
+                                </div>
+                                <div class="input-field offset-l3 col l6 s12">
+                                    <input type="text" name="txtEsta" value="${txtEsta}" placeholder="(*) Estado (1 = Activo, 0 = Inactivo)" MaxLength="1"/>
+                                </div>
+                                <legend>LISTADO DE ALUMNOS POR GRUPO</legend>
+                                <jsp:useBean id="GruposAlumnosCtrl" class="com.sv.udb.controlador.GruposAlumnosCtrl" scope="page"/>
+                                <display:table id="Personas" name="demoAttr" class="bordered highlight centered">
+                                    <display:column property="nombAlum" title="Nombre" sortable="true"/>
+                                    <display:column property="apelAlum" title="Apellido" sortable="true"/>
+                                    <display:column property="mailAlum" title="Correo" sortable="true"/>
+                                </display:table>
                             </fieldset>
                         </div>
                     </div>
