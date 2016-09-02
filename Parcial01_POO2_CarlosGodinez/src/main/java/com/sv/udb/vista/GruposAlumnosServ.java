@@ -56,14 +56,6 @@ public class GruposAlumnosServ extends HttpServlet {
 //                obje.setGeneAlum(request.getParameter("txtGene").charAt(0));
 //                mens = new AlumnosCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
             }
-            else if(CRUD.equals("Consultar"))
-            {
-                Object CodiG = request.getAttribute("cmbGrupos");
-                GruposAlumnos obj = (GruposAlumnos) new GruposAlumnosCtrl().ConsTodo(CodiG);
-                if (obj != null) {
-                    request.setAttribute( "demoAttr", new GruposAlumnosCtrl().ConsTodo(CodiG)); 
-                }
-            }
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
         else

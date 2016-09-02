@@ -54,7 +54,7 @@ public class GruposAlumnosCtrl {
         {
             TypedQuery<GruposAlumnos> query =em.createNamedQuery("GruposAlumnos.findByCodiGrup", GruposAlumnos.class);
             query.setParameter("codiGrup",Codi);
-           resp = query.getResultList();
+            resp = query.getResultList();
         }
         catch(Exception ex)
         {

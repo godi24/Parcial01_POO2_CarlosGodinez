@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0433c45d-1bcb-436f-a972-1d4b747b3276">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Codigo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT g.codi_grup_alum, a.nomb_alum, a.apel_alum, b.codi_grup, b.nomb_grup 
+FROM Grupos_Alumnos g, Alumnos a, Grupos b where g.codi_alum=a.codi_alum and g.codi_grup=b.codi_grup and b.codi_grup=$P{Codigo}]]>
+	</queryString>
+	<field name="codi_grup_alum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomb_alum" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apel_alum" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codi_grup" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomb_grup" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="147" y="21" width="217" height="36" uuid="24a1b04d-ce8b-48fe-9f1b-3533162cbeae"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Listado de alumnos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="115" height="24" uuid="56997f4e-04ab-483b-91ea-06b64214c404"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="0" width="137" height="24" uuid="f5d74fa1-af9a-44f2-abd7-88ac05b60eb2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="0" width="112" height="24" uuid="b6a0e786-2c08-4a1f-9e77-4e2d84f8bb17"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="115" height="20" uuid="e59ea13d-0ea9-49ba-89af-e65f87c6af34"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codi_grup_alum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="137" height="20" uuid="46bf3908-039c-4729-aff8-5b28fee935f5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomb_alum}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="d02b85df-d445-485c-b8df-d7e8c5c3a6fa"/>
+			</line>
+			<textField>
+				<reportElement x="252" y="0" width="112" height="20" uuid="93b878cb-35a0-47cb-b360-9c400fc76400"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apel_alum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="13" width="100" height="20" uuid="425c5e9a-7a93-4e89-bb77-07e96333094d"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

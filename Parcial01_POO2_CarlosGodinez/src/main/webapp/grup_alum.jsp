@@ -3,6 +3,7 @@
     Created on : 08-11-2016, 05:15:55 PM
     Author     : Carlos
 --%>
+<%@page import="com.sv.udb.controlador.GruposAlumnosCtrl"%>
 <%@page import="com.sv.udb.controlador.AlumnosCtrl"%>
 <%@page import="com.sv.udb.controlador.GruposCtrl"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -29,7 +30,7 @@
         </div>
         <section id="content">
             <div class="container">
-                <form action="GruposALumnosServ" method="post" name="frm">
+                <form action="GruposAlumnosServ" method="post" name="frm">
                     <div id="agregar" class="row">
                         <fieldset>
                             <legend >REGISTRO DE GRUPOS-ALUMNOS</legend>
@@ -87,11 +88,11 @@
                             <fieldset>
                                 <div class="row col offset-l2 l8 s12">
                                     Seleccionar grupo:
-                                    <select name="cmbGrupos" class="browser-default">
+                                    <select name="cmbGrupo" class="browser-default">
                                         <jsp:useBean id="GruposBuscarCtrl" class="com.sv.udb.controlador.GruposCtrl" scope="page"/>
                                         <c:forEach items="${GruposBuscarCtrl.ConsTodo()}" var="fila">
                                             <c:choose>
-                                                <c:when test="${fila.codiGrup eq cmbGrupos}">
+                                                <c:when test="${fila.codiGrup eq cmbGrupo}">
                                                     <option name="codiGrup" value="${fila.codiGrup}" selected="">${fila.nombGrup}</option>
                                                 </c:when>
                                                 <c:otherwise>
@@ -101,11 +102,15 @@
                                         </c:forEach>
                                     </select><br>
                                 </div>
-                                <div class="input-field offset-l3 col l6 s12">
-                                    <input type="text" name="txtEsta" value="${txtEsta}" placeholder="(*) Estado (1 = Activo, 0 = Inactivo)" MaxLength="1"/>
-                                </div>
+                                        <div class="col s12">
+                                            <center>
+                                                <button class="btn waves-effect waves-light light-blue darken-4" type="submit" name="accionBtn" value="Consultar">Consultar</button>
+                                            </center>
+                                        </div>
+                                 <a href="reporte.jsp" class="btn waves-effect waves-light light-blue darken-4">Reporte</a>
                                 <legend>LISTADO DE ALUMNOS POR GRUPO</legend>
-                                <jsp:useBean id="GruposAlumnosCtrl" class="com.sv.udb.controlador.GruposAlumnosCtrl" scope="page"/>
+                                <% Object Codi = request.getAttribute("cmbGrupo");%>
+                                <% request.setAttribute( "demoAttr", new GruposAlumnosCtrl().ConsTodo(Codi)); %>
                                 <display:table id="Personas" name="demoAttr" class="bordered highlight centered">
                                     <display:column property="nombAlum" title="Nombre" sortable="true"/>
                                     <display:column property="apelAlum" title="Apellido" sortable="true"/>

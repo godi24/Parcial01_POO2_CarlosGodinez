@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GruposAlumnos.findAll", query = "SELECT g FROM GruposAlumnos g"),
+    @NamedQuery(name = "GruposAlumnos.findByCodiGrup", query = "SELECT g FROM GruposAlumnos g INNER JOIN Grupos a ON g.codiGrup=a.codi_grup where a.codiGrup= :codiGrup"),
     @NamedQuery(name = "GruposAlumnos.findByCodiGrupAlum", query = "SELECT g FROM GruposAlumnos g WHERE g.codiGrupAlum = :codiGrupAlum"),
     @NamedQuery(name = "GruposAlumnos.findByEstaGrupAlum", query = "SELECT g FROM GruposAlumnos g WHERE g.estaGrupAlum = :estaGrupAlum")})
 public class GruposAlumnos implements Serializable {
